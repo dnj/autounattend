@@ -54,10 +54,12 @@ class Factory extends Container
     {
         $encoder = new XmlEncoder();
 
-        return $encoder->encode($this->jsonSerialize(), 'xml', [
+        $xml = $encoder->encode($this->jsonSerialize(), 'xml', [
             'xml_format_output' => true,
             'xml_root_node_name' => 'unattend',
         ]);
+        $xml = str_replace("\n", "\r\n", $xml);
+        return $xml;
     }
 
     /**
@@ -76,7 +78,9 @@ class Factory extends Container
                         continue;
                     }
                     $component = $this->{$property->getName()}->jsonSerialize($p);
-                    $components = $this->merge($components, $component);
+                    foreach ($this->prepareComponent($component) as $item) {
+                        $components = $this->merge($components, $item);
+                    }
                 }
                 if (empty($components)) {
                     continue;
@@ -88,5 +92,25 @@ class Factory extends Container
         }
 
         return $data;
+    }
+    protected function prepareComponent(array $component, array $archs = ["x86", "amd64"]) {
+        $defaultValues = [
+            'publicKeyToken' => '31bf3856ad364e35',
+            'language' => 'neutral',
+            'versionScope' => 'nonSxS',
+            'xmlns:wcm' => 'http://schemas.microsoft.com/WMIConfig/2002/State',
+            'xmlns:xsi' => 'http://www.w3.org/2001/XMLSchema-instance',
+        ];
+        $outputs = [];
+        foreach ($archs as $arch) {
+            $component['component']['@processorArchitecture'] = $arch;
+            foreach ($defaultValues as $key => $value) {
+                if (!isset($component['component']['@' . $key])) {
+                    $component['component']['@' . $key] = $value;
+                }
+            }
+            $outputs[] = $component;
+        }
+        return $outputs;
     }
 }

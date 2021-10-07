@@ -51,13 +51,12 @@ trait ExportTrait
             if ((in_array(substr($k, 0, 1), ['_']))) {
                 continue;
             }
-            $customKey = ucfirst($k);
             $result = $this->normalize($pass, $v);
 
             if (null === $result) {
                 continue;
             }
-            $appendInValue($newValue, $customKey, $result);
+            $appendInValue($newValue, $k, $result);
         }
 
         return $newValue;
@@ -98,7 +97,7 @@ trait ExportTrait
     {
         $data = [];
         foreach ($this->getPropertiesForPass($pass) as $property) {
-            $name = $property->getName();
+            $name = ucfirst($property->getName());
             $value = $this->{$property->getName()};
             foreach ($property->getAttributes() as $attribute) {
                 if (Attributes\Container::class == $attribute->getName()) {

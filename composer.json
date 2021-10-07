@@ -2,6 +2,7 @@
     "name": "dnj/autounattend",
     "description": "A library for generating Windows setup Autounattend.xml",
     "type": "library",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "dnj\\Autounattend\\": "src/"

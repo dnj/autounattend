@@ -10,12 +10,6 @@ use dnj\Autounattend\Setup\ImageInstall;
 use dnj\Autounattend\Setup\UserData;
 
 #[Attribute('name', 'Microsoft-Windows-Setup')]
-#[Attribute('processorArchitecture', 'amd64')]
-#[Attribute('publicKeyToken', '31bf3856ad364e35')]
-#[Attribute('language', 'neutral')]
-#[Attribute('versionScope', 'nonSxS')]
-#[Attribute('xmlns:wcm', 'http://schemas.microsoft.com/WMIConfig/2002/State')]
-#[Attribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance')]
 #[Wrapper('component')]
 class Setup implements \JsonSerializable
 {

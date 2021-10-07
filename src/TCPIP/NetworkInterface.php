@@ -44,6 +44,7 @@ class NetworkInterface implements \JsonSerializable
      * @var string[]
      */
     #[EachCast(IpAddress::class)]
+    #[Counter('@wcm:keyValue', 1)]
     #[Container]
     public ?array $unicastIpAddresses = null;
 
@@ -62,7 +63,7 @@ class NetworkInterface implements \JsonSerializable
      */
     public function __construct(
         string $identifier,
-        array $routes,
+        array $routes = [],
         ?IpSettings $ipv4Settings = null,
         ?IpSettings $ipv6Settings = null,
         ?array $unicastIpAddresses = null

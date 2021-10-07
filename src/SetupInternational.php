@@ -10,12 +10,6 @@ use dnj\Autounattend\SetupInternational\SetupUILanguage;
  * @see https://docs.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/microsoft-windows-international-core-winpe
  */
 #[Attribute('name', 'Microsoft-Windows-International-Core-WinPE')]
-#[Attribute('processorArchitecture', 'amd64')]
-#[Attribute('publicKeyToken', '31bf3856ad364e35')]
-#[Attribute('language', 'neutral')]
-#[Attribute('versionScope', 'nonSxS')]
-#[Attribute('xmlns:wcm', 'http://schemas.microsoft.com/WMIConfig/2002/State')]
-#[Attribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance')]
 #[Wrapper('component')]
 class SetupInternational implements \JsonSerializable
 {

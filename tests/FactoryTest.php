@@ -54,15 +54,15 @@ class FactoryTest extends TestCase
         $setup->enableNetwork = true;
         $setup->enableFirewall = false;
 
-        $createMSR = new Setup\DiskConfiguration\Disk\CreatePartition('MSR', 350);
-        $modifyMSR = new Setup\DiskConfiguration\Disk\ModifyPartition(0);
+        $createMSR = new Setup\DiskConfiguration\Disk\CreatePartition('Primary', 350);
+        $modifyMSR = new Setup\DiskConfiguration\Disk\ModifyPartition(1);
         $modifyMSR->active = true;
         $modifyMSR->format = 'NTFS';
         $modifyMSR->label = 'System Reserved';
         $modifyMSR->typeID = '0x27';
 
         $createC = new Setup\DiskConfiguration\Disk\CreatePartition('Primary', null, true);
-        $modifyC = new Setup\DiskConfiguration\Disk\ModifyPartition(1);
+        $modifyC = new Setup\DiskConfiguration\Disk\ModifyPartition(2);
         $modifyC->active = true;
         $modifyC->extend = false;
         $modifyC->format = 'NTFS';
@@ -96,6 +96,7 @@ class FactoryTest extends TestCase
         $osImage = new Setup\ImageInstall\Image();
         $osImage->installTo = $installTo;
         $osImage->installFrom = $installFrom;
+        $osImage->willShowUI = 'OnError';
 
         $imageInstall = new Setup\ImageInstall($osImage);
 
