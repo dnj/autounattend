@@ -5,8 +5,6 @@ namespace dnj\Autounattend;
 use dnj\Autounattend\Attributes\Attribute;
 use dnj\Autounattend\Attributes\Wrapper;
 
-#[Attribute('wcm:action', 'add')]
-#[Wrapper]
 class SynchronousCommand extends Command
 {
     public function __construct(Command $command)

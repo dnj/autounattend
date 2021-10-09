@@ -8,6 +8,7 @@ use dnj\Autounattend\Attributes\Counter;
 use dnj\Autounattend\Attributes\EachCast;
 use dnj\Autounattend\Attributes\Pass;
 use dnj\Autounattend\Attributes\Wrapper;
+use dnj\Autounattend\Attributes\Name;
 use dnj\Autounattend\ShellSetup\AutoLogon;
 use dnj\Autounattend\ShellSetup\OOBE;
 use dnj\Autounattend\ShellSetup\UserAccounts;
@@ -40,6 +41,7 @@ class ShellSetup implements \JsonSerializable
      * Specifies values that suppress certain pages of OOBE.
      */
     #[Pass('oobeSystem')]
+    #[Name('OOBE')]
     public ?OOBE $oobe = null;
 
     /**
@@ -48,7 +50,7 @@ class ShellSetup implements \JsonSerializable
      * @var Command[]
      */
     #[Pass('oobeSystem')]
-    #[EachCast(SynchronousCommand::class)]
+    #[EachCast(ShellSetup\SynchronousCommand::class)]
     #[Counter('Order', 1)]
     #[Container]
     public ?array $firstLogonCommands = null;
@@ -59,7 +61,8 @@ class ShellSetup implements \JsonSerializable
      * @var Command[]
      */
     #[Pass('specialize')]
-    #[EachCast(AsynchronousCommand::class)]
+    #[EachCast(ShellSetup\AsynchronousCommand::class)]
+    #[Counter('Order', 1)]
     #[Container]
     public ?array $logonCommands = null;
 
@@ -67,6 +70,7 @@ class ShellSetup implements \JsonSerializable
      * Specifies values that suppress certain pages of OOBE.
      */
     #[Pass('specialize')]
+    #[Name('OEMName')]
     public ?string $oemName = null;
 
     /**

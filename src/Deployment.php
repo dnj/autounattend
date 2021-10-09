@@ -19,7 +19,8 @@ class Deployment implements \JsonSerializable
      *
      * @var Command[]|null
      */
-    #[EachCast(AsynchronousCommand::class)]
+    #[EachCast(Deployment\AsynchronousCommand::class)]
+    #[Counter('Order', 1)]
     #[Container]
     public ?array $runAsynchronous = null;
 
@@ -28,7 +29,7 @@ class Deployment implements \JsonSerializable
      *
      * @var Command[]|null
      */
-    #[EachCast(SynchronousCommand::class)]
+    #[EachCast(Deployment\SynchronousCommand::class)]
     #[Counter('Order', 1)]
     #[Container]
     public ?array $runSynchronous = null;
