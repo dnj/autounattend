@@ -16,6 +16,6 @@ class LocalSessionManager implements \JsonSerializable
      * Specifies whether remote desktop connections are enabled.
      * The default value is true.
      */
-    #[Name("fDenyTSConnections")]
+    #[Name('fDenyTSConnections')]
     public ?bool $fDenyTSConnections = null;
 }

@@ -59,6 +59,7 @@ class Factory extends Container
             'xml_root_node_name' => 'unattend',
         ]);
         $xml = str_replace("\n", "\r\n", $xml);
+
         return $xml;
     }
 
@@ -93,7 +94,9 @@ class Factory extends Container
 
         return $data;
     }
-    protected function prepareComponent(array $component, array $archs = ["x86", "amd64"]) {
+
+    protected function prepareComponent(array $component, array $archs = ['x86', 'amd64'])
+    {
         $defaultValues = [
             'publicKeyToken' => '31bf3856ad364e35',
             'language' => 'neutral',
@@ -105,12 +108,13 @@ class Factory extends Container
         foreach ($archs as $arch) {
             $component['component']['@processorArchitecture'] = $arch;
             foreach ($defaultValues as $key => $value) {
-                if (!isset($component['component']['@' . $key])) {
-                    $component['component']['@' . $key] = $value;
+                if (!isset($component['component']['@'.$key])) {
+                    $component['component']['@'.$key] = $value;
                 }
             }
             $outputs[] = $component;
         }
+
         return $outputs;
     }
 }

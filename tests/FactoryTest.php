@@ -203,6 +203,6 @@ class FactoryTest extends TestCase
         $factory->deployment = $deployment;
 
         $xml = $factory->toXML();
-        echo($xml);
+        echo $xml;
     }
 }
